@@ -39,10 +39,16 @@ function addNumbers(num1, num2) {
  *   email: "leia@leia.com",
  * }
 */
-function makePersonObject(/* code here */) {
+function makePersonObject(objId, objName, objEmail) {
   /* code here */
+  const personObject = {
+    id: objId,
+    name: objName,
+    email: objEmail
+  }
+  return personObject;
 }
-
+console.log("makePersonObject result:", makePersonObject(5, 'Leia', 'leia@leia.com'));
 /**
  * ### Challenge `getName`
  * 
@@ -56,10 +62,11 @@ function makePersonObject(/* code here */) {
  * passing { id: 1, name: 'Leia', email: 'leia@leia.com` } as the argument,
  * the returned value should look like `Hello, my name is Leia`.
 */
-function getName(/* code here */) {
+function getName (object) {
   /* code here */
+  return "Hello, my name is " + object.name;
 }
-
+console.log("getName results:", getName({ id: 1, name: 'Leia', email: 'leia@leia.com' }))
 /**
  * ### Challenge `makeSmartPerson`
  * 
@@ -73,17 +80,28 @@ function getName(/* code here */) {
  *         and returns a string like `Hello, my name is {name}`.
  *         where `{name}` is the name passed into `makeSmartPerson`.
 */
-function makeSmartPerson(/* code here */) {
+function makeSmartPerson(nameProp) {
   /* code here */
-}
+  return {
+    name: nameProp,
+    sum: function (num1, num2) {
+      return num1 + num2;
+    },
+    speak: function() {
+      return 'Hello, my name is ' + nameProp;
+    }
+  }
+
+};
+console.log("makeSmartPerson results:", makeSmartPerson("Ike"));
 
 
 
 
 
-/*
+
+
 // ⭐️ Example Test Data ⭐️
-
 var inventory = [
   { id: 1, car_make: "Lincoln", car_model: "Navigator", car_year: 2009 },
   { id: 2, car_make: "Mazda", car_model: "Miata MX-5", car_year: 2001 },
@@ -101,7 +119,7 @@ var inventory = [
   { id: 14, car_make: "Dodge", car_model: "Ram Van 1500", car_year: 1999 }
   /// ... Truncated
 ]
-*/
+
 /**
   * ### Example Array Challenge:
   * 
@@ -137,7 +155,13 @@ function get3rdCar(inventory) {
 */
 function getCarInfoByIndex(inventory, index) {
   /* code here */
+  // const the1st = inventory.find((item, index)=> {
+  //   return index === 0
+  // })
+  // return `This is a ${the1st.car_make} ${the1st.car_model}`
+  return `This is a ${inventory[index].car_make} ${inventory[index].car_model}`;
 }
+console.log("getCarInfoByIndex results:", getCarInfoByIndex(inventory, 6));
 
 /**
  * ### Challenge `getLastCarInfo`
@@ -150,9 +174,11 @@ function getCarInfoByIndex(inventory, index) {
  * For example, if getLastCarInfo is invoked passing the inventory inside /data/inventory.js,
  * it will return `This is a Lincoln Town Car`.
 */
-function getLastCarInfo(/* code here */) {
+function getLastCarInfo(array) {
   /* code here */
+  return `This is a ${array[array.length-1].car_make} ${array[array.length-1].car_model}`;
 }
+console.log("getLastCarInfo results: ", getLastCarInfo(inventory));
 
 /**
  * ### Challenge `getCarInfoById`
@@ -166,8 +192,13 @@ function getLastCarInfo(/* code here */) {
  * For example, if getCarInfoById is invoked with the inventory and the number 1,
  * it will return `This is a Lincoln Navigator`.
 */
-function getCarInfoById(/* code here */) {
+function getCarInfoById(array, num) {
   /* code here */
+  for (let i=0; i < array.length; i++) {
+    if (array[i].id === num) {
+      return `This is a ${array[i].car_make} ${array[i].car_model}`;
+    }
+  }
 }
 
 /**
@@ -178,8 +209,19 @@ function getCarInfoById(/* code here */) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * sortCarInventory returns an inventory that is sorted by car_model, ascending [A-Z].
 */
-function sortCarInventory(/* code here */) {
+function sortCarInventory(inventory) {
   /* code here */
+  return inventory.sort(function(a, b)) {
+    if (a.car_model > b.car_model) {
+      return 1;
+    }
+    if (a.car_model < b.car_model) {
+      return -1;
+    }
+    else {
+      return 0;
+    }
+  }
 }
 
 /**
@@ -222,8 +264,9 @@ function getOlderCars(/* code here */) {
  * made by either `Audi` or `Mercedes-Benz` or `Volkswagen` or `BMW`,
  * in the same order as they appear in the original inventory.
 */
-function getGermanCars(/* code here */) {
+function getGermanCars(array) {
   /* code here */
+  
 }
 
 /**
